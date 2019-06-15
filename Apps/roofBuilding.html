@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Use correct character set. -->
+  <meta charset="utf-8">
+  <!-- Tell IE to use the latest, best version. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="roofBuilding.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <title>New York Buildings roofs</title>
+  <script src="../Build/Cesium/Cesium.js"></script>
+</head>
+<body>
+  <div id="cesiumContainer"></div>
+  <div class="toolbar-left" id="leftToolbar" style="display:none">
+    <button class="btn btn-success" onclick="correct();">Correct</button>
+    <button  id="falseBtn" class="btn btn-danger" onclick="falsee();">False</button><br><br>
+    <button class="btn btn-primary" style="width: 140px;"onclick="next();">Next</button>
+    <div class="alert alert-success alert-dismissible" id="successAlert"  style="display:none;position: relative;bottom: 90px;left: 440px;">
+      <strong>The selected building class saved as correct!</strong>
+      <button type="button" class="btn btn-secondary" onclick="closealert('successAlert');">Ok</button>
+    </div>
+    <br>  <br>
+    <input type="checkbox"  value="points" id="points"  onclick="showPointsCloud()"> <label style="color:white"> Show points cloud  </label>
+
+    <!-- The False Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" style= "color: black;opacity: 1;">&times;</span>
+        <h3>Your Feedback about the selected entiy class</h3>
+
+          <div>
+            <div class="form-row">
+
+
+            <p>What could be changed/modified for the selected roof? </p>
+            <input type="checkbox"  value="Height" id="height"  onclick="ShowInput('height','showheight')"> <label> Height  </label>
+            <div  id="showheight" style="display:none;padding-left: 2px;">
+              <div class="col-md-6" style=" display: flex; ">
+                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Higher:  </label>  <input type="text"  class="form-control"  placeholder="Height in meter">
+              </div>
+              <div class="col-md-6" style=" display: flex; ">
+                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Lower:  </label>  <input type="text"  class="form-control"  placeholder="Height in meter">
+              </div>
+            </div>
+            <br>
+            <input type="checkbox"  value="Location" id="location"  onclick="ShowInput('location','showloc')"> <label> Location  </label>
+            <div  id="showloc" style="display:none;padding-left: 2px;">
+              <div class="col-md-6" style=" display: flex; ">
+                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Latitude:  </label>  <input type="text"  class="form-control"  >
+              </div>
+              <div class="col-md-6" style=" display: flex; ">
+                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Longitude:  </label>  <input type="text"  class="form-control"  >
+              </div>
+            </div>
+            <br>
+            <input type="checkbox"  value="class" id="class"  onclick="ShowInput('class','showclass')"> <label> Roof Class Type  </label>
+            <div  id="showclass" style="display:none;padding-left: 2px;">
+                <div class="col-md-6" style=" display: flex; ">
+                  <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"for="sel1">Select suggested class type: </label>
+                 <select class="form-control" id="sel1" style="    margin-top: 13px;">
+                   <option>Pyramid roof</option>
+                   <option>One-sided hip roof</option>
+                   <option>Saddleback roof</option>
+                   <option>Flat</option>
+                 </select>
+                </div>
+            </div>
+            <br><br>
+            <br><br>
+            <div>
+              <p>Other suggestions? </p>
+              <textarea placeholder="Write your feedback here..." rows="4" cols="50">
+              </textarea>
+           </div>
+
+           <div class="modal-footer" style="position: absolute; bottom: 0px;right: 0;">
+             <button class="btn btn-primary" onclick="hideModel();">Edit Mode</button>
+             <button class="btn btn-primary" onclick="hideModel();">Submit</button>
+           </div>
+
+         </div>
+
+          </div>
+
+    </div>
+    </div>
+  </div>
+
+  <div id="insetCesiumContainer"></div>
+  <script src="roofBuilding.js">
+
+  </script>
+</body>
+</html>
