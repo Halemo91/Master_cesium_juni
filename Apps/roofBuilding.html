@@ -18,12 +18,17 @@
 <body>
   <div id="cesiumContainer"></div>
   <div class="toolbar-left" id="leftToolbar" style="display:none">
+    <div id="QA_buttons">
     <button class="btn btn-success" onclick="correct();">Correct</button>
     <button  id="falseBtn" class="btn btn-danger" onclick="falsee();">False</button><br><br>
     <button class="btn btn-primary" style="width: 140px;"onclick="next();">Next</button>
     <div class="alert alert-success alert-dismissible" id="successAlert"  style="display:none;position: relative;bottom: 90px;left: 440px;">
       <strong>The selected building class saved as correct!</strong>
       <button type="button" class="btn btn-secondary" onclick="closealert('successAlert');">Ok</button>
+    </div>
+    </div>
+    <div id="backtoqa" style="display: none">
+      <button type="button" class="btn btn-primary" onclick="showqa();">back</button>
     </div>
     <br>  <br>
     <input type="checkbox"  value="points" id="points"  onclick="showPointsCloud()"> <label style="color:white"> Show points cloud  </label>
@@ -53,11 +58,14 @@
             <br>
             <input type="checkbox"  value="Location" id="location"  onclick="ShowInput('location','showloc')"> <label> Location  </label>
             <div  id="showloc" style="display:none;padding-left: 2px;">
-              <div class="col-md-6" style=" display: flex; ">
-                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Latitude:  </label>  <input type="text"  class="form-control"  >
+              <div class="col-md-4" style=" display: flex; ">
+                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Latitude:  </label>  <input type="text"  class="form-control" id="lat"  >
               </div>
-              <div class="col-md-6" style=" display: flex; ">
-                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Longitude:  </label>  <input type="text"  class="form-control"  >
+              <div class="col-md-4" style=" display: flex; ">
+                <label style="font-weight: 500; margin-top: 6px;padding-right: 10px;"> Longitude:  </label>  <input type="text"  class="form-control"  id ="long" >
+              </div>
+              <div class="col-md-4" style=" display: flex; ">
+                <button class="btn btn-primary" onclick="getLoc(true);hideModel(true);">Get location</button>
               </div>
             </div>
             <br>
@@ -72,18 +80,19 @@
                    <option>Flat</option>
                  </select>
                 </div>
+                <button class="btn btn-primary" onclick="hideModel(true);">Edit Mode</button>
+
             </div>
             <br><br>
             <br><br>
             <div>
               <p>Other suggestions? </p>
-              <textarea placeholder="Write your feedback here..." rows="4" cols="50">
+              <textarea id = "textother"placeholder="Write your feedback here..." rows="4" cols="50">
               </textarea>
            </div>
 
            <div class="modal-footer" style="position: absolute; bottom: 0px;right: 0;">
-             <button class="btn btn-primary" onclick="hideModel();">Edit Mode</button>
-             <button class="btn btn-primary" onclick="hideModel();">Submit</button>
+             <button class="btn btn-primary" onclick="hideModel();clearForm()">Submit</button>
            </div>
 
          </div>

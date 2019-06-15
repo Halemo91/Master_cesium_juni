@@ -3,6 +3,7 @@
 var array = [];
 var count = 0 ;
 var dataSources = [];
+var maplocation = [];
 var viewer = new Cesium.Viewer("cesiumContainer", {
   navigationHelpButton: false,
   animation: false,
@@ -209,8 +210,6 @@ viewer.selectedEntityChanged.addEventListener(function(entity) {
     var buttons = document.getElementById("leftToolbar");
     if (entity){
       buttons.style.display = "block";
-    } else {
-       buttons.style.display = "none";
     }
     if (Cesium.defined(entity) &&
         Cesium.defined(entity.point) &&
@@ -242,6 +241,9 @@ function next() {
 }
 // Get the modal
 var modal = document.getElementById('myModal');
+var qa = document.getElementById('QA_buttons');
+var back = document.getElementById('backtoqa');
+
 
 // Get the button that opens the modal
 var btn = document.getElementById("falseBtn");
@@ -258,8 +260,18 @@ btn.onclick = function() {
 span.onclick = function() {
   modal.style.display = "none";
 }
-hideModel = function() {
+hideModel = function(hideQA) {
   modal.style.display = "none";
+  if (hideQA){
+     qa.style.display = "none";
+     back.style.display = "block";
+  }
+}
+showqa = function() {
+     qa.style.display = "block";
+     back.style.display = "none";
+     modal.style.display = "block";
+
 
 }
 
@@ -280,4 +292,42 @@ function ShowInput(checkBox,inputToShow) {
 }
 function closealert(element) {
 document.getElementById(element).style.display = "none";
+}
+function getLoc(element) {
+
+viewer.canvas.addEventListener('click', function(e){
+  console.log('aaaaaaaaaaaaaa',element)
+    if(element){
+    var mousePosition = new Cesium.Cartesian2(e.clientX, e.clientY);
+
+    var ellipsoid = viewer.scene.globe.ellipsoid;
+    var cartesian = viewer.camera.pickEllipsoid(mousePosition, ellipsoid);
+    if (cartesian) {
+        var cartographic = ellipsoid.cartesianToCartographic(cartesian);
+        var longitudeString = Cesium.Math.toDegrees(cartographic.longitude).toFixed(5);
+        var latitudeString = Cesium.Math.toDegrees(cartographic.latitude).toFixed(5);
+          document.getElementById("long").value = longitudeString;
+            document.getElementById("lat").value =latitudeString;
+        showqa();
+    } else {
+        alert('Globe was not picked');
+    }
+element = false;
+
+}
+}, false);
+// viewer.canvas.removeEventListener('click', function(e){
+//   console.log(e)
+// }, false)
+
+}
+function clearForm(){
+  document.getElementById("height").checked = false;
+   document.getElementById("location").checked = false;
+   document.getElementById("class").checked = false;
+
+    document.getElementById("long").value = "";
+    document.getElementById("lat").value ="";
+    document.getElementById("textother").value ="";
+
 }
