@@ -19,19 +19,35 @@
   <div id="cesiumContainer"></div>
   <div class="toolbar-left" id="leftToolbar" style="display:none">
     <div id="QA_buttons">
-    <button class="btn btn-success" onclick="correct();">Correct</button>
-    <button  id="falseBtn" class="btn btn-danger" onclick="falsee();">False</button><br><br>
-    <button class="btn btn-primary" style="width: 140px;"onclick="next();">Next</button>
-    <div class="alert alert-success alert-dismissible" id="successAlert"  style="display:none;position: relative;bottom: 90px;left: 440px;">
-      <strong>The selected building class saved as correct!</strong>
-      <button type="button" class="btn btn-secondary" onclick="closealert('successAlert');">Ok</button>
-    </div>
+        <button class="btn btn-success" onclick="correct();">Correct</button>
+        <button  id="falseBtn" class="btn btn-danger" >False</button><br><br>
+        <button class="btn btn-primary" style="width: 140px;"onclick="next();">Next</button>
+        <div class="alert alert-success alert-dismissible" id="successAlert"  style="display:none;position: relative;bottom: 90px;left: 440px;">
+          <strong>The selected building class saved as correct!</strong>
+          <button type="button" class="btn btn-secondary" onclick="closealert('successAlert');">Ok</button>
+        </div>
+        <br>  <br>
+        <input type="checkbox"  value="points" id="points"  onclick="showPointsCloud()"> <label style="color:white"> Show points cloud  </label>
     </div>
     <div id="backtoqa" style="display: none">
       <button type="button" class="btn btn-primary" onclick="showqa();">back</button>
     </div>
-    <br>  <br>
-    <input type="checkbox"  value="points" id="points"  onclick="showPointsCloud()"> <label style="color:white"> Show points cloud  </label>
+    <div id="locationMessage" style="display: none">
+       <label style="color:white"> Click anywhere to get longitude and latitude </label>
+    </div>
+    <div id="drawMessage" style="display: none">
+      <table class="infoPanel" style="color: white">
+          <tbody>
+          <tr>
+              <td>Left click to add a vertex.</td>
+          </tr>
+           <tr>
+              <td>Right click to start new shape.</td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+
 
     <!-- The False Modal -->
     <div id="myModal" class="modal">
@@ -80,7 +96,7 @@
                    <option>Flat</option>
                  </select>
                 </div>
-                <button class="btn btn-primary" onclick="hideModel(true);">Edit Mode</button>
+                <button style="position:relative; top: 15px;" class="btn btn-primary" onclick="hideModel(true);draw(true);">Edit Mode</button>
 
             </div>
             <br><br>
